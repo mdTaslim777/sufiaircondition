@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sufi Air Condition - Referral Program</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .input-field {
+            transition: all 0.3s;
+        }
+        .input-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+        .notification {
+            animation: slideIn 0.5s forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Notification -->
+    <div id="notification" class="fixed top-4 right-4 hidden max-w-md w-full bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-lg notification"></div>
+
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="gradient-bg text-white rounded-xl p-6 mb-8 card-shadow">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="fas fa-fan text-3xl mr-3"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold">Sufi Air Condition</h1>
+                        <p class="text-blue-100">Cooling Solutions · Energy Efficiency</p>
+                    </div>
+                </div>
+                <div class="flex space-x-2">
+                    <button id="loginBtn" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Login Modal -->
+        <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-xl p-6 w-full max-w-md">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">Login</h3>
+                    <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="loginForm">
+                    <div class="mb-4">
+                        <label for="loginEmail" class="block text-gray-700 mb-2">Email Address</label>
+                        <input type="email" id="loginEmail" class="w-full px-4 py-2 border rounded-lg input-field" placeholder="Enter your email" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="loginPassword" class="block text-gray-700 mb-2">Password</label>
+                        <input type="password" id="loginPassword" class="w-full px-4 py-2 border rounded-lg input-field" placeholder="Enter password" required>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-medium btn-primary">
+                        Login
+                    </button>
+                </form>
+                <p class="text-center mt-4 text-gray-600">
+                    Don't have an account? <a href="#" id="showRegisterFromLogin" class="text-blue-600 hover:underline">Register</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- User Dashboard (Hidden Initially) -->
+        <div id="userDashboard" class="hidden">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Your Referral Rewards</h3>
+            <div id="referralRewards" class="bg-white rounded-xl p-6 card-shadow">
+                <p class="text-gray-600">Total Referrals: <span id="totalReferrals">0</span></p>
+                <p class="text-gray-600">Total Earnings: ₹<span id="totalEarnings">0</span></p>
+                <button id="submitBankDetailsBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4">Submit Bank Details</button>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard (Hidden Initially) -->
+        <div id="adminDashboard" class="hidden">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Admin Dashboard</h3>
+            <div id="userBankDetails" class="bg-white rounded-xl p-6 card-shadow">
+                <h4 class="font-semibold mb-2">User  Bank Accounts</h4>
+                <table class="min-w-full">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="text-left py-3 px-4">User  Email</th>
+                            <th class="text-left py-3 px-4">Bank Account</th>
+                            <th class="text-left py-3 px-4">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bankTableBody">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for handling modal display and form submissions
+        document.getElementById('loginBtn').onclick = function() {
+            document.getElementById('loginModal').classList.remove('hidden');
+        };
+
+        document.getElementById('closeLoginModal').onclick = function() {
+            document.getElementById('loginModal').classList.add('hidden');
+        };
+
+        document.getElementById('loginForm').onsubmit = function(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Simulated login logic
+            if (email === 'admin@sac.com' && password === 'Admin') {
+                document.getElementById('adminDashboard').classList.remove('hidden');
+                document.getElementById('userDashboard').classList.add('hidden');
+                loadAdminData();
+            } else if (email === 'sufiaircondition24@gmail.com' && password === 'Admin') {
+                document.getElementById('userDashboard').classList.remove('hidden');
+                document.getElementById('adminDashboard').classList.add('hidden');
+                loadUser Data();
+            } else {
+                alert('Invalid credentials');
+            }
+            document.getElementById('loginModal').classList.add('hidden');
+        };
+
+        function loadUser Data() {
+            // Simulated user data loading
+            document.getElementById('totalReferrals').innerText = 5; // Example data
+            document.getElementById('totalEarnings').innerText = 2000; // Example data
+        }
+
+        function loadAdminData() {
+            // Simulated admin data loading
+            const bankTableBody = document.getElementById('bankTableBody');
+            bankTableBody.innerHTML = `
+                <tr>
+                    <td class="py-3 px-4">user1@example.com</td>
+                    <td class="py-3 px-4">Account No: 1234567890</td>
+                    <td class="py-3 px-4">₹400</td>
+                </tr>
+                <tr>
+                    <td class="py-3 px-4">user2@example.com</td>
+                    <td class="py-3 px-4">Account No: 0987654321</td>
+                    <td class="py-3 px-4">₹400</td>
+                </tr>
+            `;
+        }
+    </script>
+</body>
+</html>
