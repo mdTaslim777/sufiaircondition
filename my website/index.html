@@ -1,0 +1,105 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sufi Air Condition - Referral Program</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .input-field {
+            transition: all 0.3s;
+        }
+        .input-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+        .tab-active {
+            border-bottom: 3px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .notification {
+            animation: slideIn 0.5s forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Notification -->
+    <div id="notification" class="fixed top-4 right-4 hidden max-w-md w-full bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-lg notification"></div>
+
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="gradient-bg text-white rounded-xl p-6 mb-8 card-shadow">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="fas fa-fan text-3xl mr-3"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold">Sufi Air Condition</h1>
+                        <p class="text-blue-100">Cooling Solutions · Energy Efficiency</p>
+                    </div>
+                </div>
+                <div class="flex space-x-2">
+                    <button id="loginBtn" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition">
+                        Login
+                    </button>
+                    <button id="registerBtn" class="bg-blue-600 px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition">
+                        Register
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="mb-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Refer & Earn Program</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+                Earn ₹400 for every successful referral when your friends purchase from Sufi Air Condition. 
+                Get rewards directly in your bank account!
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-xl card-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-plus text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">1. Share Your Link</h3>
+                    <p class="text-gray-600">Share your unique referral link with friends</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl card-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shopping-cart text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">2. They Purchase</h3>
+                    <p class="text-gray-600">Your friends buy from Sufi Air Condition</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl card-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-rupee-sign text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">3. Get ₹400 Reward</h3>
+                    <p class="text-gray-600">Amount credited to your bank account</p>
+                </div>
+            ...
